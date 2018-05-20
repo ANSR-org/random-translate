@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Translator</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css"/>
+</head>
+<body>
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div class="container">
+        <a href="/" class="navbar-brand">RandomTranslator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/"><u>Translate</u></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Suggest a Translation</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="page-header" id="banner">
+        <div class="row">
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h1>Random Translator</h1>
+                <p class="lead">Receive a random translation for your phrase for maximum accuracy!</p>
+            </div>
+        </div>
+    </div>
+    <div class="bs-docs-section">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="bs-component">
+                    <form method="post" th:object="${translation}">
+                        <fieldset>
+                            <legend>Suggest a Translation</legend>
+                            <div class="form-group">
+                                <label th:for="*{fromLanguage}">From:</label>
+                                <select th:field="*{fromLanguage}" class="form-control">
+                                    <option th:each="lang : ${langs}" th:value="${lang.code}"
+                                            th:text="${lang.name}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label th:for="*{phrase}">Phrase:</label>
+                                <div class="col-sm-10">
+                                    <textarea cols="45" th:field="*{phrase}"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label th:for="*{toLanguage}">To:</label>
+                                <select th:field="*{toLanguage}" class="form-control">
+                                    <option th:each="lang : ${langs}" th:value="${lang.code}"
+                                            th:text="${lang.name}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label th:for="*{result}">Translation:</label>
+                                <div class="col-sm-10">
+                                    <textarea cols="45" th:field="*{result}"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Suggest!</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
